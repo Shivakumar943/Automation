@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [FaceBook validate]">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="faceBook.FbPage">
+        <methods>
+          <include name="tearDown"/>
+          <include name="run"/>
+          <include name="launch"/>
+        </methods>
+      </class> <!-- faceBook.FbPage -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [FaceBook validate] -->

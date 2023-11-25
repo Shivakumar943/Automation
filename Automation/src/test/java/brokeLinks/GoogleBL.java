@@ -1,0 +1,54 @@
+package brokeLinks;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class GoogleBL 
+{
+	public static void main(String[] args) throws IOException 
+	{
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions op=new ChromeOptions();
+		op.addArguments("--remote-allow-origins=*");
+		WebDriver driver=new ChromeDriver(op);
+		
+		driver.get("https://www.google.com/");
+		
+		List<WebElement> ls=driver.findElements(By.tagName("a"));
+		
+		for(int i=0;i<ls.size();i++)
+		{
+			WebElement ge=ls.get(i);
+			String hrf=ge.getAttribute("href");
+			
+			URL rl=new URL(hrf);
+			
+			HttpURLConnection htp= (HttpURLConnection) rl.openConnection();
+			
+			htp.connect();
+			
+			int res=htp.getResponseCode();
+			
+			if(res>=400)
+			{
+				System.out.println("Yes present");
+				
+			}else
+			{
+				System.err.println("NO");
+				break;
+			}
+		}
+		driver.close();
+	}
+}
